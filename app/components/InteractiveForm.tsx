@@ -10,7 +10,7 @@ export default function InteractiveForm() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const description = e.target.description.value;
-    setLoading(true);  // Set loading to true while the request is being processed
+    setLoading(true);
 
     const response = await fetch('/api/submit', {
       method: 'POST',
@@ -21,12 +21,12 @@ export default function InteractiveForm() {
     });
 
     const result = await response.json();
-    setLoading(false);  // Set loading to false after the response is received
+    setLoading(false);
 
     if (result.tweet) {
-      setTweet(result.tweet);  // Set the generated tweet
+      setTweet(result.tweet);
     } else {
-      console.error('Error:', result.error);  // Handle the error response
+      console.error('Error:', result.error);
     }
   };
 
@@ -39,10 +39,8 @@ export default function InteractiveForm() {
 
   const handleRegenerate = async () => {
     if (tweet) {
-      // Regenerate the tweet by re-triggering the API call
       setLoading(true);
-      const description = tweet;  // Optionally, use the previous description or update as needed
-
+      const description = tweet;
       const response = await fetch('/api/submit', {
         method: 'POST',
         headers: {
@@ -55,7 +53,7 @@ export default function InteractiveForm() {
       setLoading(false);
 
       if (result.tweet) {
-        setTweet(result.tweet);  // Set the new generated tweet
+        setTweet(result.tweet);
       }
     }
   };
