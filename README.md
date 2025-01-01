@@ -12,7 +12,7 @@ Video Link : https://vimeo.com/1043260556?share=copy
 
 ### Prerequisites
 
-- Node.js (>= 14.0)
+- Node.js (>= 18.0)
 - npm or yarn (package manager)
 
 ### Steps to Get Started
