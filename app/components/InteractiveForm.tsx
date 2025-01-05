@@ -1,7 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { BsArrowRightCircle } from "react-icons/bs";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent } from "@/components/ui/card";
+import { Loader2, Send, Copy, RefreshCw } from "lucide-react";
 
 export default function InteractiveForm() {
   const [tweet, setTweet] = useState<string | null>(null);
@@ -59,76 +62,65 @@ export default function InteractiveForm() {
   };
 
   return (
-    <div className="w-full relative">
-      <form onSubmit={handleSubmit} className="w-full">
-        <div className="relative">
-          <textarea
-            id="description"
-            name="description"
-            rows={10}
-            placeholder="Write your thoughts here..."
-            className="
-              block 
-              w-full
-              px-4 
-              py-3 
-              mt-4
-              bg-transparent
-              text-lg
-              border 
-              border-gray-300 
-              text-white
-              rounded-md 
-              focus:outline-none 
-              focus:ring-2 
-              focus:ring-gray-300 
-              focus:border-transparent
-            "
-          />
-          <button
-            type="submit"
-            className="
-              absolute 
-              bottom-2 
-              right-2 
-              p-2 
-              rounded-full 
-              text-white 
-              bg-transparent 
-              hover:bg-gray-700
-            "
-            disabled={loading}
-          >
-            <BsArrowRightCircle size={30} />
-          </button>
-        </div>
-      </form>
-
-      {tweet && (
-        <div className="mt-6 text-white">
-          <p className="text-lg">{tweet}</p>
-          <div className="flex gap-4 mt-4">
-            <button
-              onClick={handleCopy}
-              className="px-4 py-2 bg-blue-500 rounded-full text-white hover:bg-blue-400"
+    <Card className="w-full bg-transparent border-gray-800">
+      <CardContent className="pt-6">
+        <form onSubmit={handleSubmit} className="w-full space-y-4">
+          <div className="relative">
+            <Textarea
+              id="description"
+              name="description"
+              placeholder="Write your thoughts here..."
+              className="min-h-[200px] bg-transparent text-lg resize-none text-white 2xl:text-xl"
+              disabled={loading}
+            />
+            <Button
+              type="submit"
+              size="icon"
+              variant="ghost"
+              className="absolute bottom-2 right-2 text-white bg-primary/80 hover:bg-primary/90"
+              disabled={loading}
             >
-              Copy
-            </button>
-            <button
-              onClick={handleRegenerate}
-              className="px-4 py-2 bg-green-500 rounded-full text-white hover:bg-green-400"
-            >
-              Regenerate
-            </button>
+              <Send className="h-5 w-5" />
+            </Button>
           </div>
-        </div>
-      )}
+        </form>
 
-      {loading && (
-        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-opacity-50">
-          <span className="text-white">Generating tweet...</span>
-        </div>
-      )}
-    </div>
+        {tweet && (
+          <Card className="mt-6 bg-transparent border-gray-800">
+            <CardContent className="pt-6 pb-4 space-y-4 text-center bg-gray-800">
+              <p className="text-lg text-white">{tweet}</p>
+              <div className="flex gap-4 mt-4">
+                <Button
+                  onClick={handleCopy}
+                  variant="secondary"
+                  className="gap-2 flex items-center justify-center gap-1 h-10 px-4 text-sm font-medium rounded-md"
+                >
+                  <Copy className="h-4 w-4" />
+                  Copy
+                </Button>
+                <Button
+                  onClick={handleRegenerate}
+                  variant="secondary"
+                  className="gap-2 flex items-center justify-center gap-1 h-10 px-4 text-sm font-medium rounded-md"
+                  disabled={loading}
+                >
+                  <RefreshCw className="h-4 w-4" />
+                  Regenerate
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {loading && (
+          <div className="absolute inset-0">
+            <div className="flex items-center gap-2">
+              <Loader2 className="h-6 w-6 animate-spin" />
+              <span className="text-sm">Generating tweet...</span>
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }
