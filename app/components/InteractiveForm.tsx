@@ -73,7 +73,7 @@ export default function InteractiveForm() {
               px-4 
               py-3 
               mt-4
-              bg-[#1a1a1a]
+              bg-transparent
               text-lg
               border 
               border-gray-300 
