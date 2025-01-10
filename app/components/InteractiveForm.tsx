@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,16 +9,16 @@ import { Loader2, Send, Copy, RefreshCw } from "lucide-react";
 export default function InteractiveForm() {
   const [tweet, setTweet] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const description = e.target.description.value;
     setLoading(true);
 
-    const response = await fetch('/api/submit', {
-      method: 'POST',
+    const response = await fetch("/api/submit", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ description }),
     });
@@ -29,14 +29,14 @@ export default function InteractiveForm() {
     if (result.tweet) {
       setTweet(result.tweet);
     } else {
-      console.error('Error:', result.error);
+      console.error("Error:", result.error);
     }
   };
 
   const handleCopy = () => {
     if (tweet) {
       navigator.clipboard.writeText(tweet);
-      alert('Tweet copied to clipboard!');
+      alert("Tweet copied to clipboard!");
     }
   };
 
@@ -44,10 +44,10 @@ export default function InteractiveForm() {
     if (tweet) {
       setLoading(true);
       const description = tweet;
-      const response = await fetch('/api/submit', {
-        method: 'POST',
+      const response = await fetch("/api/submit", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ description }),
       });
@@ -62,7 +62,7 @@ export default function InteractiveForm() {
   };
 
   return (
-    <Card className="w-full bg-transparent border-gray-800">
+    <Card className="w-full bg-transparent border-none">
       <CardContent className="pt-6">
         <form onSubmit={handleSubmit} className="w-full space-y-4">
           <div className="relative">
