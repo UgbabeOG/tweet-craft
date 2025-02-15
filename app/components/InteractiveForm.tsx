@@ -10,9 +10,10 @@ export default function InteractiveForm() {
   const [tweet, setTweet] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const description = e.target.description.value;
+    const form = e.target as HTMLFormElement;
+    const description = (form.elements.namedItem("description") as HTMLTextAreaElement).value;
     setLoading(true);
 
     const response = await fetch("/api/submit", {
