@@ -3,7 +3,9 @@ import { NextResponse } from "next/server";
 
 const API_KEY = process.env.GEMINI_AI_API_KEY;
 if (!API_KEY) {
-  throw new Error("GEMINI_AI_API_KEY is not set in your environment variables.");
+  throw new Error(
+    "GEMINI_AI_API_KEY is not set in your environment variables."
+  );
 }
 
 export async function POST(req: Request) {
@@ -22,7 +24,7 @@ export async function POST(req: Request) {
 
     const genAI = new GoogleGenerativeAI(API_KEY as string);
     const model = await genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    
+
     // You can test with a simple prompt to see if it resolves the issue:
     // const prompt = "Generate a Twitter tweet about the weather.";
     const prompt = `Generate a Twitter tweet based on this description: ${description}`;
@@ -41,7 +43,10 @@ export async function POST(req: Request) {
     if (error instanceof Error) {
       console.error("Error generating tweet:", error.message, error.stack);
       return NextResponse.json(
-        { error: "Failed to generate tweet", details: (error as Error).message },
+        {
+          error: "Failed to generate tweet",
+          details: (error as Error).message,
+        },
         { status: 500 }
       );
     } else {
@@ -51,9 +56,5 @@ export async function POST(req: Request) {
         { status: 500 }
       );
     }
-    return NextResponse.json(
-      { error: "Failed to generate tweet", details: (error as Error).message },
-      { status: 500 }
-    );
   }
 }
