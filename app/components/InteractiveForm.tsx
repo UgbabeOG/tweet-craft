@@ -94,7 +94,7 @@ export default function InteractiveForm() {
                 <Button
                   onClick={handleCopy}
                   variant="secondary"
-                  className="gap-2 flex items-center justify-center gap-1 h-10 px-4 text-sm font-medium rounded-md"
+                  className="gap-2 flex items-center justify-center h-10 px-4 text-sm font-medium rounded-md"
                 >
                   <Copy className="h-4 w-4" />
                   Copy
@@ -102,7 +102,7 @@ export default function InteractiveForm() {
                 <Button
                   onClick={handleRegenerate}
                   variant="secondary"
-                  className="gap-2 flex items-center justify-center gap-1 h-10 px-4 text-sm font-medium rounded-md"
+                  className="gap-2 flex items-center justify-center h-10 px-4 text-sm font-medium rounded-md"
                   disabled={loading}
                 >
                   <RefreshCw className="h-4 w-4" />
