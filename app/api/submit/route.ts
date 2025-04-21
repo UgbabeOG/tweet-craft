@@ -19,10 +19,10 @@ export async function POST(req: Request) {
       );
     }
     const genAI = new GoogleGenerativeAI(API_KEY);
-    const model = await genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = await genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     //test
-    const prompt = `Generate twitter tweet based on this description: ${description}`;
+    const prompt = `Generate twitter tweet or caption for photo based on this description: ${description}`;
     const result = await model.generateContent([prompt]);
 
     //test result
@@ -52,9 +52,5 @@ export async function POST(req: Request) {
         { status: 500 }
       );
     }
-    return NextResponse.json(
-      { error: "Failed to generate tweet", details: (error as Error).message },
-      { status: 500 }
-    );
   }
 }
