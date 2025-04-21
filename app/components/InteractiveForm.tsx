@@ -10,9 +10,10 @@ export default function InteractiveForm() {
   const [tweet, setTweet] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const description = e.target.description.value;
+    const form = e.target as HTMLFormElement;
+    const description = (form.elements.namedItem("description") as HTMLTextAreaElement).value;
     setLoading(true);
 
     const response = await fetch("/api/submit", {
@@ -93,7 +94,7 @@ export default function InteractiveForm() {
                 <Button
                   onClick={handleCopy}
                   variant="secondary"
-                  className="gap-2 flex items-center justify-center gap-1 h-10 px-4 text-sm font-medium rounded-md"
+                  className=" flex items-center justify-center gap-1 h-10 px-4 text-sm font-medium rounded-md"
                 >
                   <Copy className="h-4 w-4" />
                   Copy
@@ -101,7 +102,7 @@ export default function InteractiveForm() {
                 <Button
                   onClick={handleRegenerate}
                   variant="secondary"
-                  className="gap-2 flex items-center justify-center gap-1 h-10 px-4 text-sm font-medium rounded-md"
+                  className="flex items-center justify-center gap-1 h-10 px-4 text-sm font-medium rounded-md"
                   disabled={loading}
                 >
                   <RefreshCw className="h-4 w-4" />
